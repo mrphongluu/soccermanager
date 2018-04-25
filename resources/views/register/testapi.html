@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?callback=intilize&libraries=places&sensor=false"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaWwb-74L7ghqHH76du4a9pSzsi2LVHn4&libraries=geometry"></script>-->
+<script type="text/javascript">
+    google.maps.event.addDomListener(window, 'load', intilize);
+    function intilize() {
+        var autocomplete = new google.maps.places.Autocomplete(document.getElementById("txtautocomplete"));
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+
+            var place = autocomplete.getPlace();
+            var location = "Address: " + place.formatted_address + "<br/>";
+            location += "Latitude: " + place.geometry.location.lat() + "<br/>";
+            location += "Longitude: " + place.geometry.location.lng();
+            document.getElementById('lblresult').innerHTML = location
+        });
+
+    }
+
+</script>
+
+<span>location:</span><input type="text" id="txtautocomplete" style="width:200px" placeholder="enter the adress"/>
+<label id="lblresult"></label>
+</body>
+</html>
